@@ -1,0 +1,19 @@
+<ion-view view-title="Login" name="login-view">
+  <ion-content class="padding" style="background: url(img/login3.png) center; background-size: cover; padding-top: 25%;">
+      <center>
+        <div>
+          <img src="img/ionic.png">
+          <h1>aidaScan</h1>
+        </div>
+      </center>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="Usuario" ng-model="data.username">
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Contraseña" ng-model="data.password">
+        </label>
+      </div>
+      <button class="button button-block button-calm" ng-click="login()">Login</button>
+  </ion-content>
+</ion-view>

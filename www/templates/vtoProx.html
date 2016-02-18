@@ -1,0 +1,23 @@
+<ion-view view-title="VtoProx" name="vtoProx-view">
+  <ion-content class="padding" style="background: url(img/login3.png) center; background-size: cover;">
+<br>  	
+  	<center>
+		<div>
+			<h1>aidaScan</h1>
+		</div>
+	</center>
+<hr>
+<br>
+    <center>
+    	<div>
+    		<strong>Almacen: </strong>{{ idstore }} <br>
+			<strong>Cod Prod: </strong>{{ idproduct }} <br><br>
+			<label class="item item-input">
+	          	<input type="date" ng-model="data.oDate">
+	        </label>
+<br>	        
+	        <button class="button button-block button-assertive" ng-click="outDate()">Enviar</button>
+    	</div>
+    </center>
+  </ion-content>
+</ion-view>

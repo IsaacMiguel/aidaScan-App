@@ -1,0 +1,23 @@
+<ion-view view-title="Order" name="order-view">
+  <ion-content class="padding" style="background: url(img/login3.png) center; background-size: cover;">
+<br>
+  	<center>
+		<div>
+			<h1>aidaScan</h1>
+		</div>
+	</center>
+<hr>
+<br>
+    <center>
+    	<div>
+    		<strong>Almacen: </strong>{{ idstore }} <br>
+			<strong>Cod Prod: </strong>{{ idproduct }} <br><br>
+			<label class="item item-input">
+	          	<input type="number" ng-model="data.cant">
+	        </label>
+<br>
+	        <button class="button button-block button-balanced" ng-click="buy()">Pedir</button>
+    	</div>
+    </center>
+  </ion-content>
+</ion-view> 
