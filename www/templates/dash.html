@@ -17,25 +17,25 @@
       <ion-list>
         <ion-item ng-repeat="data in datos">
           <ion-row>
-            <strong><p>Almacen Nro - {{ $index + 1 }}: Cant. {{ data.st_actual1 }}</p></strong>
+            <strong><p>Almacen Nro - {{ data.computed }}: Cant. {{ data.st_actual1 }}</p></strong>
           </ion-row>
           <center>
             <div>
               <ion-row>
-                <a class="button icon icon-right ion-archive" href="#/order/{{ $index + 1 }}/{{ datos[0].st_codigo2 }}">Pedir</ion-icon></a>
+                <a class="button icon icon-right ion-archive" href="#/order/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Pedir</ion-icon></a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-printer" href="#/sticker/{{ $index + 1 }}/{{ datos[0].st_codigo2 }}">Etiqueta</a>
+                <a class="button icon icon-right ion-printer" href="#/sticker/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Etiqueta</a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-arrow-swap" href="#/vtoProx/{{ $index + 1 }}/{{ datos[0].st_codigo2 }}">Vto Prox</a>
+                <a class="button icon icon-right ion-arrow-swap" href="#/vtoProx/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Vto Prox</a>
               </ion-row>
           <br>
               <ion-row>
-                <a class="button icon icon-right ion-plus-circled" href="#/maxNum/{{ $index + 1 }}/{{ datos[0].st_codigo2 }}">Stock Max</a>
+                <a class="button icon icon-right ion-plus-circled" href="#/maxNum/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Stock Max</a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-minus-circled" href="#/minNum/{{ $index + 1 }}/{{ datos[0].st_codigo2 }}">Stock Min</a>
+                <a class="button icon icon-right ion-minus-circled" href="#/minNum/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Stock Min</a>
               </ion-row>
             </div>
           </center>

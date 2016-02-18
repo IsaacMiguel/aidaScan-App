@@ -43,7 +43,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 //controlador para testear la app con "ionic serve --lab"
 .controller('scanBarcode', function ($scope, $http) {
   $scope.scanBarcode = function () {
-    $http.get('http://url/' + imageData.text).then(
+    $http.get('url/' + imageData.text).then(
       function (res) {
         $scope.datos = res.data;
       }
