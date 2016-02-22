@@ -6,16 +6,15 @@ angular.module('starter.services', [])
       var deferred = $q.defer();
       var promise = deferred.promise;
 
-      $http.post('http://url/' + name + '/' + pw).then(
+      $http.post('url' + name + '/' + pw).then(
         function (resp) {
           var auth = resp.data;
 
-          if (auth == 'true') {
-            deferred.resolve('Bienvenido ' + name + '!');
+          if (auth != '') {
+            deferred.resolve(auth);
           } else {
-            deferred.reject('Wrong credentials.');
+            deferred.reject('Usuario y/o Contraseña invalidas');
           }
-          // For JSON responses, resp.data contains the result
         })
       
       promise.success = function(fn) {
@@ -32,40 +31,76 @@ angular.module('starter.services', [])
   }
 })
 
-.service('buyProduct', function ($http, $ionicPopup) {
+.service('buyProduct', function ($http, $ionicPopup, $q) {
   return {
-    buyOrder: function (idstore, idproduct, cant) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Pedir',
-        template: 'Se encargó ' + cant + ' unidades del producto para el almacen: ' + idstore + ' (falta hacer el backend)'
-      });
+    buyOrder: function (interno, usr, cant, idstore) {
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+      var urlReq = 'url';
+
+      $http.post(urlReq + interno + '/' + usr + '/' + cant + '/' + idstore).then(
+        function (resp) {
+          var response = resp.data;
+
+          if (response != '') {
+            deferred.resolve(response);
+          }else{
+            deferred.reject(response);
+          }
+        }
+      )
+
+      promise.success = function (fn) {
+        promise.then(fn);
+        return promise;
+      }
+
+      promise.error = function (fn) {
+        promise.then(null, fn);
+        return promise;
+      }
+      return promise;
     }
   }
 })
 
-.service('printSticker', function ($http, $ionicPopup) {
+.service('printSticker', function ($http, $ionicPopup, $q) {
   return {
-    pSticker: function (idstore, idproduct) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Imprimir',
-        template: 'Se envió el pedido de impresion del producto ' + idproduct + ' (falta hacer el backend)'
-      });
-    }
-  }
-})
-
-.service('setOutDate', function ($http, $ionicPopup) {
-  return {
-    sDate: function (idstore, idproduct, oDate) {
-      var Day = oDate.getDate();
-      var Month = oDate.getMonth();
-      var Year = oDate.getFullYear();
-      var dataDate = Day + '/' + Month + '/' + Year;
+    pSticker: function (usr, interno) {
       
-      var alertPopup = $ionicPopup.alert({
-        title: 'fecha de vencimiento',
-        template: 'Se guardo la fecha de vto. del producto ' + idproduct + ' a ' + dataDate + ' (falta hacer el backend)'
-      });
+    }
+  }
+})
+
+.service('setOutDate', function ($http, $ionicPopup, $q) {
+  return {
+    sDate: function (usr, interno, date) {
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+      var urlReq = 'url';
+
+      $http.post(urlReq + interno + '/' + usr + '/' + date).then(
+        function (resp) {
+          var response = resp.data;
+
+          if (response != '') {
+            deferred.resolve(response);
+          }else{
+            deferred.reject(response);
+          }
+        }
+      )
+
+      promise.success = function (fn) {
+        promise.then(fn);
+        return promise;
+      }
+
+      promise.error = function (fn) {
+        promise.then(null, fn);
+        return promise;
+      }
+      return promise;
     }
   }
 })

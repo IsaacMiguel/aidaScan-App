@@ -42,19 +42,19 @@ angular.module('starter', ['starter.controllers', 'starter.services'])
   })
 
  .state('order', {
-    url: '/order/:idstore/:idprod',
+    url: '/order/:idstore/:interno',
     templateUrl: 'templates/order.html',
     controller: 'order'
   })
 
  .state('sticker', {
-    url: '/sticker/:idstore/:idprod',
+    url: '/sticker/:interno',
     templateUrl: 'templates/sticker.html',
     controller: 'sticker'
   })
 
  .state('vtoProx', {
-    url: '/vtoProx/:idstore/:idprod',
+    url: '/vtoProx/:interno',
     templateUrl: 'templates/vtoProx.html',
     controller: 'vtoProx'
   })

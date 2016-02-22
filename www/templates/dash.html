@@ -13,6 +13,7 @@
       <p>&nbsp&nbspCodigo: {{ datos[0].st_codigo2 }}</p>
       <p>&nbsp&nbspNombre: {{ datos[0].st_larga }}</p>
       <p>&nbsp&nbspPrecio: {{ datos[0].st_precio1 | currency }}</p>
+      <p>&nbsp&nbspInterno: {{ datos[0].st_interno }}</p>
       
       <ion-list>
         <ion-item ng-repeat="data in datos">
@@ -22,13 +23,13 @@
           <center>
             <div>
               <ion-row>
-                <a class="button icon icon-right ion-archive" href="#/order/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Pedir</ion-icon></a>
+                <a class="button icon icon-right ion-archive" href="#/order/{{ data.computed }}/{{ datos[0].st_interno }}">Pedir</ion-icon></a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-printer" href="#/sticker/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Etiqueta</a>
+                <a class="button icon icon-right ion-printer" href="#/sticker/{{ datos[0].st_interno }}">Etiqueta</a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-arrow-swap" href="#/vtoProx/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Vto Prox</a>
+                <a class="button icon icon-right ion-arrow-swap" href="#/vtoProx/{{ datos[0].st_interno }}">Vto Prox</a>
               </ion-row>
           <br>
               <ion-row>
