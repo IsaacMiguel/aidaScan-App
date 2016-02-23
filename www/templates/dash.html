@@ -23,20 +23,20 @@
           <center>
             <div>
               <ion-row>
-                <a class="button icon icon-right ion-archive" href="#/order/{{ data.computed }}/{{ datos[0].st_interno }}">Pedir</ion-icon></a>
+                <a class="button icon icon-right ion-archive" href="#/order/{{ data.computed }}/{{ datos[0].st_interno }}/{{ datos[0].st_codigo2 }}">Pedir</ion-icon></a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-printer" href="#/sticker/{{ datos[0].st_interno }}">Etiqueta</a>
+                <a class="button icon icon-right ion-printer" href="#/sticker/{{ datos[0].st_interno }}/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Etiqueta</a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-arrow-swap" href="#/vtoProx/{{ datos[0].st_interno }}">Vto Prox</a>
+                <a class="button icon icon-right ion-arrow-swap" href="#/vtoProx/{{ datos[0].st_interno }}/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Vto Prox</a>
               </ion-row>
           <br>
               <ion-row>
-                <a class="button icon icon-right ion-plus-circled" href="#/maxNum/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Stock Max</a>
+                <a class="button icon icon-right ion-minus-circled" href="#/minNum/{{ data.computed }}/{{ datos[0].st_interno }}">Stock Min</a>
               </ion-row>
               <ion-row>
-                <a class="button icon icon-right ion-minus-circled" href="#/minNum/{{ data.computed }}/{{ datos[0].st_codigo2 }}">Stock Min</a>
+                <a class="button icon icon-right ion-plus-circled" href="#/maxNum/{{ data.computed }}/{{ datos[0].st_interno }}">Stock Max</a>
               </ion-row>
             </div>
           </center>

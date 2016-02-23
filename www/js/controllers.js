@@ -19,13 +19,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('DashCtrl', function ($scope) {})
 
-/*.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http){
+.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http){
   $scope.scanBarcode = function(){
     $cordovaBarcodeScanner
     .scan()
     .then(
       function (imageData){
-      $http.get('url' + imageData.text).then(
+      $http.get(url + imageData.text).then(
         function (res) {
           $scope.datos = res.data;
         }
@@ -39,23 +39,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       alert('Vuelva a intentarlo: ' + error);
     });
   }
-});*/
-
-//controlador para testear la app con "ionic serve --lab"
-.controller('scanBarcode', function ($scope, $http) {
-  $scope.scanBarcode = function () {
-    //$http.get('url' + imageData.text).then(
-    $http.get('url').then(
-      function (res) {
-        $scope.datos = res.data;
-      }
-    )
-  }
 })
 
 .controller('order', function ($scope, buyProduct, $stateParams, $window, $ionicPopup) {
   $scope.interno = $stateParams.interno;
   $scope.idstore = $stateParams.idstore;
+  $scope.codigo = $stateParams.codigo;
 
   $scope.data = {};
 
@@ -78,6 +67,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('sticker', function ($scope, printSticker, $stateParams, $window, $ionicPopup) {
   $scope.interno = $stateParams.interno;
+  $scope.idstore = $stateParams.idstore;
+  $scope.codigo = $stateParams.codigo;
 
   $scope.data = {};
 
@@ -98,8 +89,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   }
 })
 
-.controller('vtoProx', function ($scope, setOutDate, $stateParams, $window, $ionicPopup) {
+.controller('vtoProx', function ($scope, setOutDate, $stateParams, $ionicPopup) {
   $scope.interno = $stateParams.interno;
+  $scope.idstore = $stateParams.idstore;
+  $scope.codigo = $stateParams.codigo;
 
   $scope.data = {};
 
@@ -135,24 +128,97 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   }
 })
 
-.controller('maxNum', function ($scope, setMaxNum, $stateParams) {
-  $scope.idproduct = $stateParams.idprod;
-  $scope.idstore = $stateParams.idstore;
+.controller('minNum', function ($scope, getMinStock, setMinNum, $stateParams, $ionicPopup) {
+  var idstore = $stateParams.idstore;
+  var interno = $stateParams.interno;
 
   $scope.data = {};
 
-  $scope.maxiNum = function () {
-    setMaxNum.sMax($scope.idstore, $scope.idproduct, $scope.data.cant);
+  getMinStock.minStock(idstore, interno).success(function (data) {
+
+    $scope.idstore = idstore;
+    $scope.idproduct = $stateParams.idprod;
+    $scope.minWinter = data[0].st_minimo;
+    $scope.minSummer = data[0].st_minimoi;
+
+  }).error(function (data) {
+    var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'No se pudo leer los minimos'
+      });
+  });
+
+  $scope.minimNum = function () {
+    var cWinter = $scope.data.cantMinWinter;
+    var cSummer = $scope.data.cantMinSummer;
+
+    if (cWinter == '' || cWinter === undefined) {
+      cWinter = $scope.minWinter;
+      console.log('cWinter: ' + cWinter);
+    }
+
+    if (cSummer == '' || cSummer === undefined) {
+      cSummer = $scope.minSummer;
+    }
+
+    setMinNum.sMin(idstore, interno, cWinter, cSummer).success(
+    function (data) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Enviado',
+        template: 'Se ha actualizado los valores correctamente'
+      });
+    }).error(function (data) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'Se ha producido un error, vuelva a intentarlo'
+      });
+    });
   }
 })
 
-.controller('minNum', function ($scope, setMinNum, $stateParams) {
-  $scope.idproduct = $stateParams.idprod;
-  $scope.idstore = $stateParams.idstore;
+.controller('maxNum', function ($scope, getMaxStock, setMaxNum, $stateParams, $ionicPopup) {
+  var idstore = $stateParams.idstore;
+  var interno = $stateParams.interno;
 
   $scope.data = {};
 
-  $scope.minimNum = function () {
-    setMinNum.sMin($scope.idstore, $scope.idproduct, $scope.data.cant);
+  getMaxStock.maxStock(idstore, interno).success(function (data) {
+
+    $scope.idstore = idstore;
+    $scope.idproduct = $stateParams.idprod;
+    $scope.maxWinter = data[0].st_maximoI;
+    $scope.maxSummer = data[0].st_maximoV;
+
+  }).error(function (data) {
+    var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'No se pudo leer los maximos'
+      });
+  });
+
+  $scope.maxiNum = function () {
+    var cWinter = $scope.data.cantMaxWinter;
+    var cSummer = $scope.data.cantMaxSummer;
+
+    if (cWinter == '' || cWinter === undefined) {
+      cWinter = minWinter;
+    }
+
+    if (cSummer == '' || cSummer === undefined) {
+      cSummer = minSummer;
+    }
+
+    setMaxNum.sMax(idstore, interno, cWinter, cSummer).success(
+    function (data) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Enviado',
+        template: 'Se ha actualizado los valores correctamente'
+      });
+    }).error(function (data) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'Se ha producido un error, vuelva a intentarlo'
+      });
+    });
   }
 })

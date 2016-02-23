@@ -42,33 +42,33 @@ angular.module('starter', ['starter.controllers', 'starter.services'])
   })
 
  .state('order', {
-    url: '/order/:idstore/:interno',
+    url: '/order/:idstore/:interno/:codigo',
     templateUrl: 'templates/order.html',
     controller: 'order'
   })
 
  .state('sticker', {
-    url: '/sticker/:interno',
+    url: '/sticker/:interno/:idstore/:codigo',
     templateUrl: 'templates/sticker.html',
     controller: 'sticker'
   })
 
  .state('vtoProx', {
-    url: '/vtoProx/:interno',
+    url: '/vtoProx/:interno/:idstore/:codigo',
     templateUrl: 'templates/vtoProx.html',
     controller: 'vtoProx'
   })
 
- .state('maxNum', {
-    url: '/maxNum/:idstore/:idprod',
-    templateUrl: 'templates/maxNum.html',
-    controller: 'maxNum'
-  })
-
-  .state('minNum', {
-    url: '/minNum/:idstore/:idprod',
+ .state('minNum', {
+    url: '/minNum/:idstore/:interno',
     templateUrl: 'templates/minNum.html',
     controller: 'minNum'
+  })
+ 
+ .state('maxNum', {
+    url: '/maxNum/:idstore/:interno',
+    templateUrl: 'templates/maxNum.html',
+    controller: 'maxNum'
   })
 
   // if none of the above states are matched, use this as the fallback
