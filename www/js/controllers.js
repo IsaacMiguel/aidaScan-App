@@ -49,7 +49,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   var timeOut = timeNowb - timea;
 
   //time in miliseconds (6 hours)
-  if (timeNow > 3600000) {
+  if (timeOut > 3600000) {
     window.localStorage.setItem("username", 'null');
   }
 
