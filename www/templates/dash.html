@@ -1,11 +1,18 @@
 <ion-view view-title="Dash" name="dash-view">
   <ion-content class="padding" style="background: url(img/login3.png) center; background-size: cover;">
-<br>    
+<br>
+<ion-list>
+  <ion-row>
+      <button style="float: right;" class="button icon-center ion-search button-small button-assertive" on-touch="logOut()">
+        Logout
+      </button>
     <center>
       <button class="button icon-center ion-search button-large button-dark" on-touch="scanBarcode()">
         Scan
       </button>
     </center>
+  </ion-row>
+</ion-list>
 <br>
 <hr>
 <br>

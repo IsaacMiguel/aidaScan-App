@@ -13,7 +13,7 @@
     		<strong>Almacen: </strong>{{ idstore }} <br>
 			<strong>Cod Prod: </strong>{{ codigo }} <br><br>
 			<label class="item item-input">
-	          	<input type="number" ng-model="data.cant">
+	          	<input type="number" maxlength="4" min="0" max="9999" ng-model="data.cant">
 	        </label>
 <br>
 	        <button class="button button-block button-balanced" ng-click="buy()">Pedir</button>

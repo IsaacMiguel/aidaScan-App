@@ -15,12 +15,12 @@
 			<ion-row>
 				<p>Minimo Invierno</p> <p>Actual: {{ minWinter }}</p>
 				<label class="item item-input">
-		          	<input type="number" ng-model="data.cantMinWinter">
+		          	<input type="number" maxlength="4" min="0" max="9999" ng-model="data.cantMinWinter">
 		        </label>
 
 		        <p>Minimo Verano</p> <p>Actual: {{ minSummer }}</p>
 		        <label class="item item-input">
-		          	<input type="number" ng-model="data.cantMinSummer">
+		          	<input type="number" maxlength="4" min="0" max="9999" ng-model="data.cantMinSummer">
 		        </label>
 
 			</ion-row>

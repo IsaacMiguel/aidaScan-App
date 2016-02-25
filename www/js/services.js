@@ -6,7 +6,7 @@ angular.module('starter.services', [])
       var deferred = $q.defer();
       var promise = deferred.promise;
 
-      $http.post(url + name + '/' + pw).then(
+      $http.post('url' + name + '/' + pw).then(
         function (resp) {
           var auth = resp.data;
 
@@ -36,7 +36,7 @@ angular.module('starter.services', [])
     buyOrder: function (interno, usr, cant, idstore) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = ur;
+      var urlReq = 'url';
 
       $http.post(urlReq + interno + '/' + usr + '/' + cant + '/' + idstore).then(
         function (resp) {
@@ -69,7 +69,7 @@ angular.module('starter.services', [])
     pSticker: function (usr, interno) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = url;
+      var urlReq = 'url';
 
       $http.post(urlReq + usr + '/' + interno).then(
         function (resp) {
@@ -102,7 +102,7 @@ angular.module('starter.services', [])
     sDate: function (usr, interno, date) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = url;
+      var urlReq = 'url';
 
       $http.post(urlReq + interno + '/' + usr + '/' + date).then(
         function (resp) {
@@ -135,7 +135,7 @@ angular.module('starter.services', [])
     minStock: function (idstore, interno) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = url;
+      var urlReq = 'url';
 
       $http.post(urlReq + idstore + '/' + interno).then(
         function (resp) {
@@ -168,7 +168,7 @@ angular.module('starter.services', [])
     sMin: function (idstore, interno, cantMinWinter, cantMinSummer) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = url;
+      var urlReq = 'url';
 
       $http.post(urlReq + idstore + '/' + interno + '/' + cantMinWinter + '/' + cantMinSummer).then(
         function (resp) {
@@ -201,7 +201,7 @@ angular.module('starter.services', [])
     maxStock: function (idstore, interno) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = url;
+      var urlReq = 'url';
 
       $http.post(urlReq + idstore + '/' + interno).then(
         function (resp) {
@@ -234,7 +234,7 @@ angular.module('starter.services', [])
     sMax: function (idstore, interno, cantMaxWinter, cantMaxSummer) {
       var deferred = $q.defer();
       var promise = deferred.promise;
-      var urlReq = url;
+      var urlReq = 'url';
 
       $http.post(urlReq + idstore + '/' + interno + '/' + cantMaxWinter + '/' + cantMaxSummer).then(
         function (resp) {
