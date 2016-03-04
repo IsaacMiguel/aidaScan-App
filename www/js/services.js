@@ -10,7 +10,7 @@ angular.module('starter.services', [])
         function (resp) {
           var auth = resp.data;
 
-          if (auth != '') {
+          if (auth != 'false') {
             deferred.resolve(auth);
           } else {
             deferred.reject('Usuario y/o Contraseña invalidas');

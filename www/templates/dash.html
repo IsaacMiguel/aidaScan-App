@@ -12,15 +12,30 @@
       </button>
     </center>
   </ion-row>
-</ion-list>
-<br>
+  <ion-row>
+    <p class="text_style" style="float: right;">&nbsp&nbspv 1.0&nbsp&nbsp</p>
+  </ion-row>
 <hr>
-<br>
+  <ion-row>
+    <center>
+      <label class="item item-input">
+        <input type="number" placeholder="codigo" ng-model="data.codigo">
+      </label>
+    <br>
+      <button class="button icon-center ion-search button-small button-balanced" on-touch="searchBarcode(data.codigo)">
+        buscar
+      </button>
+    </center>
+  </ion-row>
+</ion-list>
+
+<hr>
+
     <div ng-controller="scanBarcode">
-      <p>&nbsp&nbspCodigo: {{ datos[0].st_codigo2 }}</p>
-      <p>&nbsp&nbspNombre: {{ datos[0].st_larga }}</p>
-      <p>&nbsp&nbspPrecio: {{ datos[0].st_precio1 | currency }}</p>
-      <p>&nbsp&nbspInterno: {{ datos[0].st_interno }}</p>
+      <p class="text_style">&nbsp&nbspCodigo: {{ datos[0].st_codigo2 }}</p>
+      <p class="text_style">&nbsp&nbspNombre: {{ datos[0].st_larga }}</p>
+      <p class="text_style">&nbsp&nbspPrecio: {{ datos[0].st_precio1 | currency }}</p>
+      <p class="text_style">&nbsp&nbspInterno: {{ datos[0].st_interno }}</p>
       
       <ion-list>
         <ion-item ng-repeat="data in datos">

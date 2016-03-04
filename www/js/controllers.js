@@ -8,9 +8,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     var usr = window.localStorage.getItem("username");
 
-    if (usr === 'null') {
+    if (usr === 'null' || usr === undefined) {
       $scope.login = function() {
-        console.log('entro')
         LoginService.loginUser($scope.data.username, $scope.data.password).success(function (data) {
           $state.go('dash');
           window.localStorage.setItem("username", data);
@@ -28,17 +27,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }else{
       $state.go('dash');
     }
-
-    $scope.logOut = function () {
-      console.log('logout')
-      window.localStorage.setItem("username", 'null');
-      $state.go('login');
-    }
 })
 
 .controller('DashCtrl', function ($scope) {})
 
-.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http){
+.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http, $state){
   var usr = window.localStorage.getItem("username");
 
   var time = window.localStorage.getItem("time");
@@ -55,7 +48,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   var usr = window.localStorage.getItem("username");
 
-  if (usr === null) {
+  if (usr === 'null') {
     $state.go('login');
   }else{
     $scope.scanBarcode = function(){
@@ -65,6 +58,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         function (imageData){
         $http.get('url' + imageData.text).then(
           function (res) {
+            console.log(res)
             $scope.datos = res.data;
           }
         ).error(function (err) {
@@ -77,6 +71,24 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         alert('Vuelva a intentarlo: ' + error);
       });
     }
+
+    $scope.searchBarcode = function (num) {
+      $http.get('url' + num).then(
+        function (res) {
+          $scope.datos = res.data;
+        }
+      ).error(function (err) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Error',
+          template: 'Vuelva a intentarlo - busq por ingreso de codigo'
+        });
+      });
+    }
+  }
+
+  $scope.logOut = function () {
+    window.localStorage.setItem("username", 'null');
+    $state.go('login');
   }
 })
 
@@ -228,13 +240,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     var cWinter = $scope.data.cantMinWinter;
     var cSummer = $scope.data.cantMinSummer;
 
-    if (cWinter == '' || cWinter === undefined) {
-      cWinter = $scope.minWinter;
-      console.log('cWinter: ' + cWinter);
+    if (cWinter != 0) {
+      if (cWinter == '' || cWinter === undefined) {
+        cWinter = $scope.minWinter;
+      }
     }
 
-    if (cSummer == '' || cSummer === undefined) {
-      cSummer = $scope.minSummer;
+    if (cSummer != 0) {
+      if (cSummer == '' || cSummer === undefined) {
+        cSummer = $scope.minSummer;
+      }
     }
 
     setMinNum.sMin(idstore, interno, cWinter, cSummer).success(
@@ -279,12 +294,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     var cWinter = $scope.data.cantMaxWinter;
     var cSummer = $scope.data.cantMaxSummer;
 
-    if (cWinter == '' || cWinter === undefined) {
-      cWinter = minWinter;
+    if (cWinter != 0) {
+      if (cWinter == '' || cWinter === undefined) {
+        cWinter = minWinter;
+      }
     }
 
-    if (cSummer == '' || cSummer === undefined) {
-      cSummer = minSummer;
+    if (cSummer != 0) {
+      if (cSummer == '' || cSummer === undefined) {
+        cSummer = minSummer;
+      }
     }
 
     setMaxNum.sMax(idstore, interno, cWinter, cSummer).success(

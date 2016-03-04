@@ -10,15 +10,15 @@
 <br>
     <center>
     	<div>
-    		<strong>Almacen: </strong>{{ idstore }} <br>
+    		<strong><p class="text_style">Almacen: </p></strong><p class="text_style">{{ idstore }}</p> <br>
 			
 			<ion-row>
-				<p>Máximo Invierno</p> <p>Actual: {{ maxWinter }}</p>
+				<p class="text_style">Máximo Invierno</p> <p class="text_style">Actual: {{ maxWinter }}</p>
 				<label class="item item-input">
 		          	<input type="number" maxlength="4" min="0" max="9999" ng-model="data.cantMaxWinter">
 		        </label>
 
-		        <p>Máximo Verano</p> <p>Actual: {{ maxSummer }}</p>
+		        <p class="text_style">Máximo Verano</p> <p class="text_style">Actual: {{ maxSummer }}</p>
 		        <label class="item item-input">
 		          	<input type="number" maxlength="4" min="0" max="9999" ng-model="data.cantMaxSummer">
 		        </label>
