@@ -36,7 +36,7 @@ angular.module('starter', ['starter.controllers', 'starter.services'])
   })
 
  .state('dash', {
-    url: '/dash',
+    url: '/dash/:codigo',
     templateUrl: 'templates/dash.html',
     controller: 'scanBarcode'
   })

@@ -58,15 +58,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         function (imageData){
         $http.get('url' + imageData.text).then(
           function (res) {
-            console.log(res)
             $scope.datos = res.data;
           }
-        ).error(function (err) {
-          var alertPopup = $ionicPopup.alert({
-            title: 'Error',
-            template: 'Vuelva a intentarlo'
-          });
-        });
+        );
       },function (error){
         alert('Vuelva a intentarlo: ' + error);
       });
@@ -77,12 +71,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         function (res) {
           $scope.datos = res.data;
         }
-      ).error(function (err) {
-        var alertPopup = $ionicPopup.alert({
-          title: 'Error',
-          template: 'Vuelva a intentarlo - busq por ingreso de codigo'
-        });
-      });
+      );
     }
   }
 
