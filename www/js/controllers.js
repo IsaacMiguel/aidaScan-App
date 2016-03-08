@@ -31,7 +31,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('DashCtrl', function ($scope) {})
 
-.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http, $state){
+.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http, $state, $ionicPopup){
   var usr = window.localStorage.getItem("username");
 
   var time = window.localStorage.getItem("time");
@@ -58,6 +58,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         function (imageData){
         $http.get('url' + imageData.text).then(
           function (res) {
+
+            if (res.data[0].st_codigo2 === undefined) {
+              var alertPopup = $ionicPopup.alert({
+                title: 'Error!',
+                template: 'Codigo inexistente'
+              });
+            }
+
             $scope.datos = res.data;
           }
         );
@@ -69,6 +77,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.searchBarcode = function (num) {
       $http.get('url' + num).then(
         function (res) {
+
+          if (res.data[0].st_codigo2 === undefined) {
+            var alertPopup = $ionicPopup.alert({
+              title: 'Error!',
+              template: 'Codigo inexistente'
+            });
+          }
+
           $scope.datos = res.data;
         }
       );
