@@ -2,15 +2,26 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('LoginCtrl', function ($scope, LoginService, $ionicPopup, $state, $window) {
     $scope.data = {};
+    $scope.data.isChecked = false;
 
     var setTime = new Date();
     window.localStorage.setItem("time", setTime);
 
     var usr = window.localStorage.getItem("username");
 
-    if (usr === 'null' || usr === undefined) {
+    if (usr === null || usr === undefined) {
       $scope.login = function() {
-        LoginService.loginUser($scope.data.username, $scope.data.password).success(function (data) {
+      var flag = $scope.data.isChecked;
+
+      if (flag === false) {
+        window.localStorage.setItem("logon", 'url')
+      }else{
+        window.localStorage.setItem("logon", 'url')
+      }
+
+      var urlREQ = window.localStorage.getItem("logon")
+
+        LoginService.loginUser($scope.data.username, $scope.data.password, urlREQ).success(function (data) {
           $state.go('dash');
           window.localStorage.setItem("username", data);
 
@@ -22,6 +33,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
               title: 'Error!',
               template: 'Usuario y/o contraseña incorrectos!'
             });
+
+            window.localStorage.clear();
+            $state.go('login');
         });
       }
     }else{
@@ -31,7 +45,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('DashCtrl', function ($scope) {})
 
-.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http, $state, $ionicPopup){
+.controller('scanBarcode', function ($scope, $cordovaBarcodeScanner, $http, $state, $ionicPopup, $window){
   var usr = window.localStorage.getItem("username");
 
   var time = window.localStorage.getItem("time");
@@ -52,11 +66,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $state.go('login');
   }else{
     $scope.scanBarcode = function(){
+      var url = window.localStorage.getItem("logon");
+
       $cordovaBarcodeScanner
       .scan()
       .then(
         function (imageData){
-        $http.get('url' + imageData.text).then(
+        $http.get( url + 'loginapp/scan/' + imageData.text).then(
           function (res) {
 
             if (res.data[0].st_codigo2 === undefined) {
@@ -65,17 +81,20 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                 template: 'Codigo inexistente'
               });
             }
-
             $scope.datos = res.data;
           }
         );
       },function (error){
         alert('Vuelva a intentarlo: ' + error);
+
+        window.localStorage.clear();
+        $state.go('login');
       });
     }
 
     $scope.searchBarcode = function (num) {
-      $http.get('url' + num).then(
+      var url = window.localStorage.getItem("logon");
+      $http.get( url + 'loginapp/scan/' + num).then(
         function (res) {
 
           if (res.data[0].st_codigo2 === undefined) {
@@ -86,18 +105,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           }
 
           $scope.datos = res.data;
-        }
-      );
+        }, function (error) {
+          alert('Vuelva a intentarlo: ' + error);
+
+          window.localStorage.clear();
+          $state.go('login');
+        } 
+      )
     }
   }
 
   $scope.logOut = function () {
-    window.localStorage.setItem("username", 'null');
+    window.localStorage.clear();
     $state.go('login');
   }
 })
 
-.controller('order', function ($scope, buyProduct, $state, $stateParams, $window, $ionicPopup) {
+.controller('order', function ($scope, buyProduct, $state, $stateParams, $window, $ionicPopup, $window) {
   $scope.interno = $stateParams.interno;
   $scope.idstore = $stateParams.idstore;
   $scope.codigo = $stateParams.codigo;
@@ -120,6 +144,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           title: 'Error!',
           template: data
         });
+
+        window.localStorage.clear();
+        $state.go('login');
     });
   }
 })
@@ -147,6 +174,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         title: 'Error',
         template: data
       });
+
+      window.localStorage.clear();
+      $state.go('login');
     });
   }
 })
@@ -239,6 +269,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         title: 'Error',
         template: 'No se pudo leer los minimos'
       });
+
+    window.localStorage.clear();
+    $state.go('login');
   });
 
   $scope.minimNum = function () {
@@ -271,6 +304,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         title: 'Error',
         template: 'Se ha producido un error, vuelva a intentarlo'
       });
+
+      window.localStorage.clear();
+      $state.go('login');
     });
   }
 })
@@ -293,6 +329,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         title: 'Error',
         template: 'No se pudo leer los maximos'
       });
+
+    window.localStorage.clear();
+    $state.go('login');
   });
 
   $scope.maxiNum = function () {
@@ -325,6 +364,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         title: 'Error',
         template: 'Se ha producido un error, vuelva a intentarlo'
       });
+
+      window.localStorage.clear();
+      $state.go('login');
     });
   }
 })
