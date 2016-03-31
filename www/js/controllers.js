@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('LoginCtrl', function ($scope, LoginService, $ionicPopup, $state, $window) {
+.controller('LoginCtrl', function ($scope, LoginService, $ionicPopup, $state, $window, $ionicLoading) {
     $scope.data = {};
     $scope.data.isChecked = false;
 
@@ -11,6 +11,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     if (usr === null || usr === undefined) {
       $scope.login = function() {
+
+      $ionicLoading.show({
+        content: 'Cargando...',
+        animation: 'fade-in'
+      });
+
       var flag = $scope.data.isChecked;
 
       if (flag === false) {
@@ -22,11 +28,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       var urlREQ = window.localStorage.getItem("logon")
 
         LoginService.loginUser($scope.data.username, $scope.data.password, urlREQ).success(function (data) {
-          $state.go('dash');
+          
           window.localStorage.setItem("username", data);
 
           var setTime = new Date();
           window.localStorage.setItem("time", setTime);
+
+          $ionicLoading.hide();
+
+          $state.go('dash');
 
         }).error(function (data) {
             var alertPopup = $ionicPopup.alert({
@@ -35,10 +45,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             });
 
             window.localStorage.clear();
+
+            $ionicLoading.hide();
+
             $state.go('login');
         });
       }
     }else{
+      $ionicLoading.hide();
       $state.go('dash');
     }
 })

@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.service('LoginService', function ($q, $http, $window, $state) {
+.service('LoginService', function ($q, $http, $window, $state, $ionicPopup, $ionicLoading) {
   return {
     loginUser: function(name, pw) {
       var deferred = $q.defer();
@@ -9,7 +9,7 @@ angular.module('starter.services', [])
       var url = window.localStorage.getItem("logon");
       var urlReq = url + 'loginapp/authenticate/' + name + '/' + pw;
 
-        $http.get( urlReq ).then(
+        $http.get( urlReq , {timeout: 5000}).then(
         function (resp) {
           var auth = resp.data;
 
@@ -19,7 +19,12 @@ angular.module('starter.services', [])
             deferred.reject('Usuario y/o Contraseña invalidas');
           }
         },function (error) {
-          alert('Hubo un error, vuelva a intentarlo. Asegurese de haber seleccionado el logeo correcto.');
+          var alertPopup = $ionicPopup.alert({
+              title: 'Error!',
+              template: 'Hubo un error, vuelva a intentarlo. Asegurese de haber seleccionado el logeo correcto.'
+            });
+
+          $ionicLoading.hide();
 
           window.localStorage.clear();
           $state.go('login');
